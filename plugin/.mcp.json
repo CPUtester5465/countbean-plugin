@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "countbean": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/mcp/run.sh",
+      "args": [],
+      "env": {}
+    }
+  }
+}

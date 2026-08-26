@@ -1,0 +1,81 @@
+# Packaging for the Countbean MCP server.
+#
+# WHY THIS EXISTS
+# ---------------
+# The plugin was installable exactly one way: `/plugin marketplace add`, which
+# clones the mirror and runs plugin/mcp/run.sh. That is right for Claude Code
+# and useless everywhere else — MCP directories and non-Claude clients expect
+# `uvx <name>` or `pipx run <name>`, and Glama verifies a server by building
+# and starting it. With no distribution there was nothing to install and
+# nothing to verify.
+#
+# This file lives at the MIRROR ROOT, not next to the package, because the
+# mirror is what gets published and `plugin/` is copied into it verbatim by
+# .github/workflows/publish-plugin.yml. Hence the package-dir mapping below.
+#
+# The monorepo remains the author. Editing this in countbean-plugin is
+# overwritten by the next publish.
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "countbean-mcp"
+dynamic = ["version"]
+description = "MCP server for Beancount plain-text accounting: double-entry transactions written by an AI agent, validated with bean-check and committed to git."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Tim Derzhavets" }]
+keywords = [
+  "mcp",
+  "model-context-protocol",
+  "beancount",
+  "plain-text-accounting",
+  "accounting",
+  "bookkeeping",
+  "double-entry",
+  "ledger",
+  "claude",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Office/Business :: Financial :: Accounting",
+]
+
+# Kept in step with plugin/mcp/requirements.txt by
+# platform/apps/book-runtime/tests/test_plugin_packaging.py — two dependency
+# lists for one program is exactly the drift this repo keeps getting bitten by,
+# so the duplication is asserted rather than trusted.
+dependencies = [
+  "mcp>=1.28,<2",
+  "beancount>=3.2.3,<4",
+  "beanquery>=0.2.0,<1",
+  "openpyxl>=3.1.5,<4",
+]
+
+[project.urls]
+Homepage = "https://countbean.com"
+Source = "https://github.com/CPUtester5465/countbean-plugin"
+Roadmap = "https://countbean.com/roadmap"
+
+[project.scripts]
+countbean-mcp = "countbean_mcp.server:main"
+
+[tool.setuptools]
+package-dir = { "" = "plugin/mcp" }
+
+[tool.setuptools.dynamic]
+version = { attr = "countbean_mcp.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["plugin/mcp"]
+include = ["countbean_mcp*"]

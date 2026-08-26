@@ -1,0 +1,8 @@
+# Python build/runtime artifacts — the venv is rebuilt by run.sh on first use.
+mcp/.venv/
+__pycache__/
+*.pyc
+# Generated reports and any local ledger data.
+reports/
+*.xlsx
+*.html

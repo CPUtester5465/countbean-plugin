@@ -1,0 +1,18 @@
+{
+  "name": "countbean",
+  "description": "Hosted plain-text accounting for Claude Code. Initialise a git-backed Beancount cloud book, let Claude ingest bank statements and receipts into validated double-entry transactions, and generate HTML/Excel reports.",
+  "version": "0.5.3",
+  "author": {
+    "name": "Countbean"
+  },
+  "homepage": "https://github.com/CPUtester5465/countbean-plugin",
+  "repository": "https://github.com/CPUtester5465/countbean-plugin",
+  "keywords": [
+    "accounting",
+    "beancount",
+    "fava",
+    "finance",
+    "mcp",
+    "bookkeeping"
+  ]
+}
