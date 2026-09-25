@@ -1,0 +1,16 @@
+mcp>=1.28,<2
+# Bounded to match platform/packages/ledger-core/pyproject.toml (#105). This
+# copy ships standalone against a customer's real books on their laptop, so it
+# is the one that would drift onto an unmeasured beancount unnoticed.
+beancount>=3.2.3,<4
+# beanquery ships the `bean-query` BINARY that ledger_core shells out to, so
+# this is fava's hazard exactly: the interface is a CLI, not an API, and a major
+# can rename or drop a flag. It was the only ledger dependency here with no
+# ceiling at all. The floor moves to 0.2.0 (#558) — which changes nothing that
+# gets installed, because an unbounded `>=0.1.0` already resolved to the latest;
+# the ceiling is the part that does anything.
+beanquery>=0.2.0,<1
+# openpyxl only renders /report's xlsx, so a break here is a bad download rather
+# than a bad ledger. Bounded anyway, on the same rule and for consistency: the
+# reason to bound is that nothing here reads release notes on our behalf.
+openpyxl>=3.1.5,<4
