@@ -1,0 +1,14 @@
+{
+  "name": "countbean",
+  "owner": {
+    "name": "Countbean",
+    "url": "https://countbean.com"
+  },
+  "plugins": [
+    {
+      "name": "countbean",
+      "source": "./plugin",
+      "description": "Plain-text accounting for Claude Code: a git-backed Beancount cloud book, AI ingestion of statements/receipts, and HTML/Excel reports."
+    }
+  ]
+}
